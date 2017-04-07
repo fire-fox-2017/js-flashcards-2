@@ -6,8 +6,8 @@ module.exports = class View{
   static welcomeDefined(file){
     console.log(`Welcome to JS Flash Cards. You're using the deck ${file}. \nTo play, just enter the correct term for each definition. Ready? Go!`)
   }
-  static question(m,q) {
-    console.log(m[q].definition)
+  static question(m) {
+    console.log(m[0].definition)
   }
   static line(){
     console.log('')
@@ -18,8 +18,12 @@ module.exports = class View{
   static congratulations(){
     console.log("Congratulations!")
   }
-  static incorrect(){
-    console.log("Incorrect! Try again.")
+  static incorrect(num){
+    if(num === 1){
+      console.log("Incorrect! Try again.")
+    } else {
+      console.log(`You have been incorrect for ${num} times, try again or type 'skip' to skip`)
+    }
   }
   static correct(){
     console.log("Correct!")

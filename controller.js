@@ -15,34 +15,41 @@ const rl = readline.createInterface({
 class Controller{
   constructor(){
     this.qna = m.data
-    this.num = 0
+    this.incorrect = 0
   }
   quiz(){
     View.line()
-    if(this.num<this.qna.length){
+    if(0<this.qna.length){
       View.definition()
-      View.question(this.qna,this.num)
-      this.answer(this.num)
+      View.question(this.qna)
+      this.answer()
     } else {
       View.congratulations();
       rl.close();
     }
   }
-  answer(num){
+  answer(){
     View.line()
     rl.question('Guess:', (answer) => {
-      if(this.checkAnswer(num,answer)===false){
-        View.incorrect()
-        this.answer(num);
+      if(answer === "skip"){
+        let a=this.qna.shift()
+        this.qna.push(a)
+        this.incorrect = 0
+        this.quiz();
+      } else if(this.checkAnswer(answer)===false){
+        this.incorrect += 1;
+        View.incorrect(this.incorrect)
+        this.answer(0);
       } else {
         View.correct()
-        this.num++;
+        this.qna.shift();
+        this.incorrect = 0
         this.quiz();
       }
     });
   }
-  checkAnswer(q,a){
-      return a.toLowerCase() === this.qna[q].term.toLowerCase();
+  checkAnswer(a){
+      return a.toLowerCase() === this.qna[0].term.toLowerCase();
   }
 }
 var fc = new Controller();
