@@ -12,17 +12,6 @@ class FlashCard {
     this._show = new Show();
   }
 
-  // loadJsonFile() {
-  //   let data = fs.readFileSync(this._file)
-  //     .toString();
-  //
-  //   console.log(data);
-  //   let json_data = JSON.parse(data);
-  //   // console.log(json_data);
-  //   // console.log(json_data[0]);
-  //   this._cards = json_data;
-  // }
-
   initApp() {
     let file = this.getFilename();
     if (file) {
@@ -66,20 +55,6 @@ class FlashCard {
       output: process.stdout
     });
 
-    //
-    // for(let i = 0 ; i < this._cards.length ; i++) {
-    //   console.log("Definition");
-    //   console.log(this._cards[i]['definition']);
-    //   rl.question("Guess :", (input) => {
-    //     if(input == this._cards[i]['term']) {
-    //       console.log("Correct!");
-    //     }
-    //     else {
-    //       console.log("Incorrect! Try again.");
-    //     }
-    //   })
-    //
-    // }
     this._show.printWelcomeMsg();
 
     let i = 0;
@@ -111,6 +86,64 @@ class FlashCard {
       this._show.printEndPractice();
     });
   } // end of practice
+
+  practiceAdvanced() {
+    if (!this._cards.length) {
+      console.log("No cards");
+      return;
+    }
+
+    const readline = require('readline');
+    const rl = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout
+    });
+
+    this._show.printWelcomeMsg();
+
+    let cards = this._cards;
+    let i = 0;
+
+    this._show.printCard(cards[i]);
+    rl.setPrompt("Guess: ");
+    rl.prompt();
+
+    rl.on('line', (input) => {
+        if(input == cards[i]['term']) {
+          console.log("Correct!");
+          // i += 1;
+          if(cards.length > 0) {
+            console.log("haha");
+            cards.shift();
+
+            if(cards.length == 0)
+              rl.close();
+            else {
+              this._show.printCard(cards[i]);
+              rl.prompt();
+            }
+
+          }
+          else {
+            // console.log("here");
+            // this._show.printEndPractice();
+            rl.close();
+          }
+        }
+        else if(input == "skip") {
+          cards.push(cards.shift());
+          this._show.printCard(cards[i]);
+          rl.prompt();
+        }
+        else {
+          console.log("Incorrect! Try again\n");
+          rl.prompt();
+        }
+
+    }).on('close', () => {
+      this._show.printEndPractice();
+    });
+  } // end of practiceAdvanced
 
 }
 

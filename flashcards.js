@@ -9,4 +9,5 @@ var FlashCard = require('./controller');
 let fc = new FlashCard();
 
 fc.initApp();
-fc.practice();
+// fc.practice();
+fc.practiceAdvanced();

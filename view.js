@@ -4,6 +4,7 @@
 class Show {
   printWelcomeMsg() {
     console.log("Welcome to JS Flash Cards. To Play, just enter the correct term for each definition. Ready? Go!");
+    console.log("Options: you can type 'skip' to skip a question");
   }
 
   printCard(card) {
