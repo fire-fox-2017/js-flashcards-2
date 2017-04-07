@@ -10,11 +10,12 @@ class Model {
     getData() {
         const fs = require('fs');
         const readline = require('readline');
+        let argv = process.argv;
         this.rl = readline.createInterface({
             input: process.stdin,
             output: process.stdout
         });
-        let strJson = fs.readFileSync('social.json');
+        let strJson = fs.readFileSync(argv[2]);
         let str = JSON.parse(strJson);
         this.listData = str;
         for (let i = 0; i < str.length; i++) {
