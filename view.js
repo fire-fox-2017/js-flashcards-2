@@ -22,7 +22,8 @@ class Show {
 
   }
 
-  printEndPractice() {
+  printEndPractice(guess_count) {
+    console.log(`\nGuess Count: ${guess_count}`);
     console.log(`\nCongrats, you have completed your practice!`);
   }
 }

@@ -103,45 +103,46 @@ class FlashCard {
 
     let cards = this._cards;
     let i = 0;
-
+    let guess_count = 0;
     this._show.printCard(cards[i]);
     rl.setPrompt("Guess: ");
     rl.prompt();
 
     rl.on('line', (input) => {
-        if(input == cards[i]['term']) {
-          console.log("Correct!");
-          // i += 1;
-          if(cards.length > 0) {
-            console.log("haha");
-            cards.shift();
+      guess_count += 1;
+      if(input == cards[i]['term']) {
+        console.log("Correct!");
+        // i += 1;
+        if(cards.length > 0) {
+          console.log("haha");
+          cards.shift();
 
-            if(cards.length == 0)
-              rl.close();
-            else {
-              this._show.printCard(cards[i]);
-              rl.prompt();
-            }
-
-          }
-          else {
-            // console.log("here");
-            // this._show.printEndPractice();
+          if(cards.length == 0)
             rl.close();
+          else {
+            this._show.printCard(cards[i]);
+            rl.prompt();
           }
-        }
-        else if(input == "skip") {
-          cards.push(cards.shift());
-          this._show.printCard(cards[i]);
-          rl.prompt();
+
         }
         else {
-          console.log("Incorrect! Try again\n");
-          rl.prompt();
+          // console.log("here");
+          // this._show.printEndPractice();
+          rl.close();
         }
+      }
+      else if(input == "skip") {
+        cards.push(cards.shift());
+        this._show.printCard(cards[i]);
+        rl.prompt();
+      }
+      else {
+        console.log("Incorrect! Try again\n");
+        rl.prompt();
+      }
 
     }).on('close', () => {
-      this._show.printEndPractice();
+      this._show.printEndPractice(guess_count);
     });
   } // end of practiceAdvanced
 
