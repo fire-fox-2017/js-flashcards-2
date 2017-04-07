@@ -116,7 +116,7 @@ class FlashCard {
 }
 
 
-let file = "data.json";
+// let file = "data.json";
 // let file = "datatest.json";
 let fc = new FlashCard();
 
