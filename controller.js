@@ -100,13 +100,15 @@ class FlashCard {
   } // end of practice
 
   practiceAdvanced() {
+    // cannot be run if cards array is empty
     if (!this._cards.length) {
       console.log("No cards");
       return;
     }
 
+    // cannot be run if cards format is not valid
     if (!this._isCardValid) {
-      console.log("Card format in the json file is not valid.");
+      this._show.printHelpCardFormat();
       return;
     }
 
