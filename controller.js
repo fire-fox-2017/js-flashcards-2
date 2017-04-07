@@ -10,6 +10,7 @@ class FlashCard {
 
     this._model = new Model();
     this._show = new Show();
+    this._isCardValid = false;
   }
 
   initApp() {
@@ -17,9 +18,12 @@ class FlashCard {
     if (file) {
       this._file = file;
       this._cards = this._model.loadJsonFile(this._file);
+
+      // check cards format
+      this._isCardValid = this.checkCardsFormat();
     }
     else {
-      console.log("Cannot load the file");
+      console.log("Please specified your file json.");
     }
 
   }
@@ -42,6 +46,14 @@ class FlashCard {
     return false;
   }
 
+  checkCardsFormat() {
+    for (let i = 0 ; i < this._cards.length ; i++) {
+      if(!this._cards[i].hasOwnProperty('definition') || !this._cards[i].hasOwnProperty('term')) {
+        return false;
+      }
+    }
+    return true;
+  }
 
   practice() {
     if (!this._cards.length) {
@@ -92,6 +104,12 @@ class FlashCard {
       console.log("No cards");
       return;
     }
+
+    if (!this._isCardValid) {
+      console.log("Card format in the json file is not valid.");
+      return;
+    }
+
 
     const readline = require('readline');
     const rl = readline.createInterface({
