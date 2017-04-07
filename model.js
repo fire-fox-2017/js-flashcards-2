@@ -22,7 +22,7 @@ class Model {
 
     // console.log(data);
     let json_data = JSON.parse(data);
-    console.log(json_data);
+    // console.log(json_data);
     // console.log(json_data[0]);
     return json_data;
   }

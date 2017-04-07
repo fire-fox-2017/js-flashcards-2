@@ -32,10 +32,10 @@ class FlashCard {
       }
     });
 
-    console.log("params",params);
+    // console.log("params",params);
     if(params.length) {
       let file = params.join();
-      console.log(file);
+      // console.log(file);
       return file;
     }
 
@@ -99,7 +99,7 @@ class FlashCard {
       output: process.stdout
     });
 
-    this._show.printWelcomeMsg();
+    this._show.printWelcomeMsgFile(this._file);
 
     let cards = this._cards;
     let i = 0;
