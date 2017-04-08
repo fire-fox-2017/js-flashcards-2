@@ -1,0 +1,8 @@
+[
+  {"definition": "10 + 2 = ?", "term": "12"},
+  {"definition": "1 + 2 + 3 = ?", "term": "6"},
+  {"definition": "2 x 2", "term": "4"},
+  {"definition": "100 / 10 = ?", "term": "10"},
+  {"definition": "6 x 7 = ?", "term": "42"},
+  {"definition": "10 x 10 = ?", "term": "100"}
+]
