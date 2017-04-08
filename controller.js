@@ -43,7 +43,7 @@ class Controller {
 
     }).on('close', () => {
       if(this.questionLeft < 1) {
-        console.log(`Selamat! Skor: ${this._correct} benar. ${this._wrong} salah`);
+        console.log(`Selamat! Total skor: ${this._correct} benar, ${this._wrong} salah`);
         process.exit(0);
       } else {
         console.log(`Dadah! Sampai ketemu lagi!`);
@@ -59,7 +59,7 @@ class Controller {
     this.questionLeft--;
     this.view.correctMsg(userInput, correctCounter);
     if(this.questionLeft < 1)
-          rl.close();
+      rl.close();
     this.showQuestion();
   }
 

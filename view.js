@@ -15,7 +15,7 @@ class View {
   }
 
   correctMsg(userInput, correctCounter) {
-    console.log(`Jawaban '${userInput}' benar. next question. ${correctCounter} kali benar`)
+    console.log(`Jawaban '${userInput}' benar. next question. skor: ${correctCounter}`)
   }
 
   wrongMsg(userInput, wrongCounter) {
