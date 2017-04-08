@@ -10,8 +10,8 @@ class View {
         console.log(`welcome to JS Flash Cards. Your're using the deck ${deck} \nTo play, just enter the corrent term for each definition. Ready? Go!`);
 
     }
-    questionV(def) {
-        console.log(def);
+    questionV(def,tried) {
+        console.log(`${def} | False : ${tried}`);
     }
 
     answerV(bool) {

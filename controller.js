@@ -41,12 +41,14 @@ class Controller {
     }
 
     questionC() {
+
         let tanya = this._model.questionM();
+
         if (tanya == false) {
             this._view.endV();
 
         } else {
-            this._view.questionV(tanya.definition);
+            this._view.questionV(tanya.definition,tanya.try);
         }
     }
 
@@ -59,6 +61,7 @@ class Controller {
 
         } else {
             this._view.answerV(false);
+            this._model.setFalse(tanya);
 
         }
 
