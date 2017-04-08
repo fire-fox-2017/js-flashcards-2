@@ -10,8 +10,8 @@ class View {
     console.log(`======Welcome to JS Flashcards 2======\n======ketik 'hint' untuk easy mode====\n======atau 'start' untuk mulai========`);
   }
 
-  winMsg() {
-
+  winMsg(correct, wrong) {
+    console.log(`Selamat! Total skor: ${correct} benar, ${wrong} salah`)
   }
 
   correctMsg(userInput, correctCounter) {
@@ -23,7 +23,7 @@ class View {
   }
 
   skipMsg() {
-
+    console.log(`Question dilewati.`)
   }
 
   questionMsgEasy(database, questIdx) {

@@ -2,10 +2,16 @@
 // write your code here
 
 import Controller from './controller';
-import View from './view';
+import Model from './model';
 
 class Flashcards {
   constructor() {
-
+    this.argv = process.argv[2];
+    this.controller = new Controller(this.argv);
   }
 }
+
+let flashcards = new Flashcards();
+flashcards.controller.welcome();
+
+export { flashcards }

@@ -11,14 +11,14 @@ const rl = readline.createInterface({
 });
 
 class Controller {
-  constructor(){
-    this.model = new Model();
+  constructor(userInputDatabase){
+    this.model = new Model(userInputDatabase);
     this.view = new View();
     this.data = this.model.database; // obj
+    this.questionLeft = this.model.database.length;
     this._wrong = 0;
     this._correct = 0;
     this.questIdx = 0;
-    this.questionLeft = this.model.database.length;
     this.isEasy = false;
   }
 
@@ -34,16 +34,20 @@ class Controller {
         this.showQuestion();
       } else if(userInput === 'start') {
         this.showQuestion();
+      } else if(userInput === 'skip') {
+        this.skip();
       }
       if(this.data[this.questIdx].term.toLowerCase() === userInput.toLowerCase()) {
         this.correct(userInput);
-      } else if(this.data[this.questIdx].term.toLowerCase() !== userInput.toLowerCase() && userInput.toLowerCase() !== 'start' && userInput.toLowerCase() !== 'hint') { //jangan proses hint dan start karena command
+      } else if(this.data[this.questIdx].term.toLowerCase() !== userInput.toLowerCase() && userInput.toLowerCase() !== 'start' && userInput.toLowerCase() !== 'hint' && userInput.toLowerCase() !== 'skip') { //jangan proses hint, skip dan start karena command
         this.wrong(userInput);
       }
 
     }).on('close', () => {
       if(this.questionLeft < 1) {
-        console.log(`Selamat! Total skor: ${this._correct} benar, ${this._wrong} salah`);
+        let numOfCorrect = this._correct;
+        let numOfWrong = this._wrong;
+        this.view.winMsg(numOfCorrect, numOfWrong);
         process.exit(0);
       } else {
         console.log(`Dadah! Sampai ketemu lagi!`);
@@ -70,8 +74,11 @@ class Controller {
     this.showQuestion();
   }
 
-  skip() {
-
+  skip(database = this.data) {
+    this.data.push(this.data[this.questIdx]);
+    this.questIdx += 1;
+    this.view.skipMsg();
+    this.showQuestion();
   }
   
   showQuestion(database = this.data) {
@@ -86,7 +93,7 @@ class Controller {
 
 }
 
-let control = new Controller();
-control.welcome();
+// let control = new Controller();
+// control.welcome();
 
 export default Controller
