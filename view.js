@@ -18,8 +18,8 @@ class View {
     console.log(`Jawaban '${userInput}' benar. next question`)
   }
 
-  wrongMsg() {
-
+  wrongMsg(userInput) {
+    console.log(`Jawaban '${userInput}' salah. coba lagi`)
   }
 
   skipMsg() {

@@ -37,6 +37,8 @@ class Controller {
       }
       if(this.data[this.questIdx].term.toLowerCase() === userInput.toLowerCase()) {
         this.correct(userInput);
+      } else if(this.data[this.questIdx].term.toLowerCase() !== userInput.toLowerCase() && userInput.toLowerCase() !== 'start' && userInput.toLowerCase() !== 'hint') { //jangan proses hint dan start karena command
+        this.wrong(userInput);
       }
 
     }).on('close', () => {
@@ -61,8 +63,10 @@ class Controller {
     this.showQuestion();
   }
 
-  wrong() {
-
+  wrong(userInput) {
+    this._wrong++;
+    this.view.wrongMsg(userInput);
+    this.showQuestion();
   }
 
   skip() {
