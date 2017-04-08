@@ -6,6 +6,6 @@ import View from './view';
 
 class Flashcards {
   constructor() {
-    
+
   }
 }

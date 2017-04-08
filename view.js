@@ -25,6 +25,14 @@ class View {
   skipMsg() {
 
   }
+
+  questionMsgEasy(database, questIdx) {
+    console.log(`${database[questIdx].definition} | first letter: ${database[questIdx].term.charAt(0)}`);
+  }
+
+  questionMsg(database, questIdx) {
+    console.log(`${database[questIdx].definition}`);
+  }
 }
 
 export default View;

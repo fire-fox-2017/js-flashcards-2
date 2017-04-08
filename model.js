@@ -4,14 +4,10 @@
 const fs = require('fs');
 
 class Model {
-  constructor(database) {
-    this.database = database || 'social.json';
-  }
-
-  getData() {
-    return JSON.parse(fs.readFileSync(this.data, 'utf-8'));
+  constructor(database = 'social.json') {
+    this.database = JSON.parse(fs.readFileSync(database, 'utf-8'));
   }
 
 }
 
-export default Model;
+export default Model
