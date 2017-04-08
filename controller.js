@@ -16,13 +16,12 @@ class Control {
       output: process.stdout,
       prompt: "Guess: "
     });
-    this.falseCount = {};
-    this.answered = {};
+
   }
 
   loadFile() {
     const argv = process.argv;
-    if (argv.length > 2) {
+    if (argv.length > 2 && argv[2]) {
       return argv[2];
     } else {
       this.view.requireFileArgv();
@@ -39,35 +38,25 @@ class Control {
     let rl = this.rl;
     let index = quizIndex;
 
-    if (!this.answered.hasOwnProperty(index)) {
-      this.answered[index] = false;
+    if (quizIndex < this.quiz.length && !this.quiz[index].hasOwnProperty("falseCount")) {
+      this.quiz[index]["falseCount"] = 0;
     }
 
-    console.log(this.answered);
-
-    // index = this.answeredQuestCheck();
-    console.log(this.answeredQuestCheck());
-
-    if (this.falseCount.hasOwnProperty(index)) {
-      this.falseCount[index] ++;
-    } else {
-      this.falseCount[index] = 0;
-    }
-
-    if (quizIndex < this.quiz.length && !this.answeredQuestCheck()) {
+    if (quizIndex < this.quiz.length) {
       this.showQuestion(index);
       rl.prompt();
-      rl.question("Guess: ", (guess) => {
+      rl.question("Guess (enter 'skip' to skip the question): ", (guess) => {
         if (this.answerCheck(index, guess)) {
-          this.answered[index] = true;
           this.view.correct();
           index ++;
           this.flashing(index);
         } else if (guess === "skip") {
+          this.quiz.push(this.quiz[index]);
           index ++;
           this.flashing(index);
         } else {
-          this.view.incorrect(this.falseCount[index] + 1);
+		  this.quiz[index]["falseCount"] ++;
+          this.view.incorrect(this.quiz[index]["falseCount"]);
           this.flashing(index);
         }
       });
@@ -88,16 +77,6 @@ class Control {
     } else {
       return false;
     }
-  }
-
-  answeredQuestCheck() {
-    let unanswered = 0;
-    for (let i = 0; i < this.answered.length; i++) {
-      if (this.answered[i] === false) {
-        unanswered ++;
-      }
-    }
-    return unanswered;
   }
 
 }
