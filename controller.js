@@ -48,7 +48,7 @@ class Controller {
             this._view.endV();
 
         } else {
-            this._view.questionV(tanya.definition,tanya.try);
+            this._view.questionV(tanya.definition, tanya.try);
         }
     }
 

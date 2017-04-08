@@ -18,11 +18,11 @@ class Model {
         this.createBool();
     }
 
-    createBool(){
-      for(let i=0;i<this._listData.length;i++) {
-        this._listData[i]['answered']=false
-        this._listData[i]['try']=0
-      }
+    createBool() {
+        for (let i = 0; i < this._listData.length; i++) {
+            this._listData[i]['answered'] = false
+            this._listData[i]['try'] = 0
+        }
 
 
     }
@@ -66,14 +66,14 @@ class Model {
         }
     }
 
-    setFalse(tanya){
-      for (var i = 0; i < this._listData.length; i++) {
+    setFalse(tanya) {
+        for (var i = 0; i < this._listData.length; i++) {
 
-          if (this._listData[i].definition === tanya.definition) {
-              this._listData[i].try++;
-              console.log('INI COY '+this._listData[i].try)
-          }
-      }
+            if (this._listData[i].definition === tanya.definition) {
+                this._listData[i].try++;
+                console.log('INI COY ' + this._listData[i].try)
+            }
+        }
 
 
     }
