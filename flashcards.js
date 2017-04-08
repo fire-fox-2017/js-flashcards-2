@@ -14,4 +14,4 @@ class Flashcards {
 let flashcards = new Flashcards();
 flashcards.controller.welcome();
 
-export { flashcards }
+export default Flashcards
