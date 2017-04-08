@@ -14,12 +14,12 @@ class View {
 
   }
 
-  correctMsg(userInput) {
-    console.log(`Jawaban '${userInput}' benar. next question`)
+  correctMsg(userInput, correctCounter) {
+    console.log(`Jawaban '${userInput}' benar. next question. ${correctCounter} kali benar`)
   }
 
-  wrongMsg(userInput) {
-    console.log(`Jawaban '${userInput}' salah. coba lagi`)
+  wrongMsg(userInput, wrongCounter) {
+    console.log(`Jawaban '${userInput}' salah. coba lagi. Kamu ${wrongCounter} kali salah`)
   }
 
   skipMsg() {

@@ -43,7 +43,7 @@ class Controller {
 
     }).on('close', () => {
       if(this.questionLeft < 1) {
-        console.log(`Selamat! Anda berhasil gan! :)`);
+        console.log(`Selamat! Skor: ${this._correct} benar. ${this._wrong} salah`);
         process.exit(0);
       } else {
         console.log(`Dadah! Sampai ketemu lagi!`);
@@ -53,19 +53,20 @@ class Controller {
       
     }
 
-  correct(userInput) {
-    this._correct++;
+  correct(userInput, correctCounter) {
+    correctCounter = this._correct += 1;
     this.questIdx++;
     this.questionLeft--;
-    this.view.correctMsg(userInput);
+    this.view.correctMsg(userInput, correctCounter);
     if(this.questionLeft < 1)
           rl.close();
     this.showQuestion();
   }
 
-  wrong(userInput) {
-    this._wrong++;
-    this.view.wrongMsg(userInput);
+  wrong(userInput, wrongCounter) {
+    wrongCounter = this._wrong += 1;
+    this._correct--;
+    this.view.wrongMsg(userInput, wrongCounter);
     this.showQuestion();
   }
 
