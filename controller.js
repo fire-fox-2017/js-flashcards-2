@@ -18,45 +18,46 @@ class Controller {
     this._wrong = 0;
     this._correct = 0;
     this.questIdx = 0;
+    this.questionLeft = this.model.database.length;
+    this.isEasy = false;
   }
 
   welcome() {
     this.view.welcomeMsg();
+    this.play();
+  }
+
+  play() {
     rl.on('line', (userInput) => {
       if(userInput === 'hint') {
-        // rl.close();
-        this.play(this.easyMode());
-      } else {
-        rl.close();
-        this.play();
+        this.isEasy = true;
+        this.showQuestion();
+      } else if(userInput === 'start') {
+        this.showQuestion();
       }
-    });
-  }
-
-  easyMode() {
-    return 'easy';
-  }
-
-  play(isEasy = 'normal') {
-    if(isEasy === 'easy') {
-      this.showQuestion('easy');
-      rl.on('line', (userInput) => {
       if(this.data[this.questIdx].term.toLowerCase() === userInput.toLowerCase()) {
         this.correct(userInput);
       }
-    });
-    } else {
-      rl.on('line', (userInput) => {
-        
-      })
+
+    }).on('close', () => {
+      if(this.questionLeft < 1) {
+        console.log(`Selamat! Anda berhasil gan! :)`);
+        process.exit(0);
+      } else {
+        console.log(`Dadah! Sampai ketemu lagi!`);
+      }
+    });;
+
+      
     }
-    
-  }
 
   correct(userInput) {
-    this.correct++;
+    this._correct++;
     this.questIdx++;
+    this.questionLeft--;
     this.view.correctMsg(userInput);
+    if(this.questionLeft < 1)
+          rl.close();
     this.showQuestion();
   }
 
@@ -68,9 +69,9 @@ class Controller {
 
   }
   
-  showQuestion(mode, database = this.data) {
+  showQuestion(database = this.data) {
     let questIdx = this.questIdx;
-    if(mode === 'easy') {
+    if(this.isEasy) {
       this.view.questionMsgEasy(database, questIdx)
     } else {
       this.view.questionMsg(database, questIdx);

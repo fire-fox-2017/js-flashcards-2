@@ -7,7 +7,7 @@ class View {
   }
 
   welcomeMsg() {
-    console.log(`======Welcome to JS Flashcards 2======\n======ketik 'hint' untuk easy mode======`);
+    console.log(`======Welcome to JS Flashcards 2======\n======ketik 'hint' untuk easy mode====\n======atau 'start' untuk mulai========`);
   }
 
   winMsg() {
