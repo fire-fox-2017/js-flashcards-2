@@ -75,11 +75,13 @@ class flashCardController {
         listQuestion.push(definition);
         this._model.insertDefinition(listQuestion);
         this._numQuestion++;
+        // console.log(this._numQuestion);
+        // console.log(listQuestion.length -1);
         this.listQuestion();
     } else {
       this._view.showAnswer(dataAnswer);
       var answer = this._model.getAnswer(dataAnswer, this._numQuestion);
-      console.log(answer);
+      // console.log(answer);
 
       if(this._numQuestion < listQuestion.length - 1){
         if(answer == true){
@@ -87,6 +89,7 @@ class flashCardController {
           this._numQuestion++;
           this._wrongAnswer = 0;
           // console.log(this._numQuestion);
+          // console.log(listQuestion.length -1);
           this.listQuestion();
         } else {
           this._view.showWrongAnswer();
