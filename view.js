@@ -25,8 +25,8 @@ class CardView {
         console.log('Congrats!');
     }
 
-    messageIncorrect() {
-        console.log('Incorrect!\n');
+    messageIncorrect(wrongAnswer) {
+        console.log(`Incorrect!\n There is ${wrongAnswer} wrong answer.`);
     }
 
     messageInputFileErr() {

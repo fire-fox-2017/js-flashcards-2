@@ -25,7 +25,7 @@ class CardController {
             }
         } else {
             this._cardView.messageInputFileErr()
-            process.exit(0)
+            process.exit()
         }
     }
 
@@ -39,7 +39,7 @@ class CardController {
             this._cardView.displayQuestion(this._file[indexQues].definition)
             this._rl.prompt()
 
-            if (indexQues < this._file.length) {
+            if (indexQues > this._file.length) {
                 if (wrongAnswer !== 0) {
                     wrongAnswer = 0
                 }
@@ -48,6 +48,7 @@ class CardController {
             this._rl.question('Guess :', (answer) => {
                 if (this.cekAnswer(indexQues, answer)) {
                     indexQues++
+                    wrongAnswer = 0
                     this._cardView.messageCorrect()
                     this.startAnswer(indexQues, wrongAnswer)
                 } else if (answer == 'skip') {
@@ -57,7 +58,7 @@ class CardController {
                     this.startAnswer(indexQues, wrongAnswer)
                 } else {
                     wrongAnswer++
-                    this._cardView.messageIncorrect()
+                    this._cardView.messageIncorrect(wrongAnswer)
                     this.startAnswer(indexQues, wrongAnswer)
                 }
             })
