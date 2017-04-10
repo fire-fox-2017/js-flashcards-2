@@ -105,9 +105,9 @@ class Controller {
 
                 app.questionC();
                 rl.prompt();
-            } else {
-
-                rl.close();
+                if(app.checkquestionC() == false){
+                  rl.close();
+                }
             }
 
 
