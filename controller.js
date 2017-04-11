@@ -52,13 +52,11 @@ class Controller{
       return a.toLowerCase() === this.qna[0].term.toLowerCase();
   }
 }
-
+var fc = new Controller();
 if(process.argv[2] === undefined){
   View.welcome()
-  var fc = new Controller();
 } else{
   View.welcomeDefined(process.argv[2])
-  var fc = new Controller();
 }
 
 fc.quiz();
